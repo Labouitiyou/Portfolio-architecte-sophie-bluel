@@ -4,9 +4,9 @@ const gallery = document.querySelector(".gallery");
 
 async function getworks() {
 const reponse = await fetch("http://localhost:5678/api/works");
-return await reponse.json();
+const works= await reponse.json();
+return works;
 }
-//const workslist= getworks();
 
 //Affichage des works //
 async function afficherworks(works){
@@ -23,5 +23,8 @@ async function afficherworks(works){
     }
 }
 
-afficherworks(works);
+document.addEventListener("DOMContentLoaded", async () => {
+    const works = await getworks();
+    await afficherworks(works); 
+});
 
