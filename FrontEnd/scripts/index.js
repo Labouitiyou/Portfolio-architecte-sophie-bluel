@@ -1,15 +1,16 @@
 const gallery = document.querySelector(".gallery");
+const filtres = document.querySelector(".filtres");
 
 //Récupération des works //
 
-async function getworks() {
+async function getWorks() {
 const reponse = await fetch("http://localhost:5678/api/works");
 const works= await reponse.json();
 return works;
 }
 
 //Affichage des works //
-async function afficherworks(works){
+async function afficherWorks(works){
     gallery.innerHTML = "";
     for (let i=0; i< works.length; i++) {
         const figure = document.createElement("figure");
@@ -23,8 +24,48 @@ async function afficherworks(works){
     }
 }
 
+// Récupérer les catégories //
+async function getCategory(){
+const reponse = await fetch("http://localhost:5678/api/categories");
+const categorys= await reponse.json();
+return categorys;
+}
+
+// Génerer dynamiquement le menu de catégories//
+async function generateMenuCategory()
+{
+    const categorys = await getCategory();
+    for (let i=0; i<categorys.length; i++) {
+    const button= document.createElement("button");
+    button.textContent = categorys[i].name;
+    button.id= categorys[i].id;
+    filtres.appendChild(button);
+     }
+}
+
+ // Ajout des filtres pour afficher les travaux par catégorie 
+async function filtrerCategory(){
+    const listButton= document.querySelectorAll(".filtres button")
+    const works = await getWorks();
+    for (let i=0; i< listButton.length; i++){
+        listButton[i].addEventListener("click", async () => {
+            if (listButton[i].id !== "0"){ 
+                 const worksfiltres = works.filter(function(work) {
+                    return work.categoryId == listButton[i].id;
+                   });
+                   await afficherWorks(worksfiltres);
+            }
+            else {
+                await afficherWorks(works); 
+            }
+        });
+    }
+}
 document.addEventListener("DOMContentLoaded", async () => {
-    const works = await getworks();
-    await afficherworks(works); 
+    await generateMenuCategory();
+    const works = await getWorks();
+    await afficherWorks(works); 
+    await filtrerCategory();
 });
+
 
