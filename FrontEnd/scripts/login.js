@@ -1,19 +1,19 @@
+
+//Connexion 
 function login(){
     const form= document.getElementById("loginForm");
     form.addEventListener("submit", async (event)=>{
         event.preventDefault();
         const email= document.getElementById("email").value;
         const password = document.getElementById("password").value;
-        const user = {
-             email: email,
-             password: password, };
         const loginErreur= document.querySelector(".passwordErr");
+
         try {
             // Appel de la fonction fetch avec toutes les informations nécessaires
               const response = await fetch("http://localhost:5678/api/users/login", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(user),
+              body: JSON.stringify({email, password}),
               });
     
             // Vérification de la réponse
@@ -25,7 +25,7 @@ function login(){
             const result = await response.json();
               // Stockage du token dans le local storage
             localStorage.setItem("token", result.token);
-            window.alert(result.token);
+            
             // Redirection vers la page d'accueil
             window.location.href ="./index.html";
 

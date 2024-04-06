@@ -129,6 +129,13 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+.title {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    gap: 20px;
+}
 .edition-mode {
 	background-color: black;
 	height: 60px;
