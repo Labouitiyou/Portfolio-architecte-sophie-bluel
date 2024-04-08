@@ -102,6 +102,12 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+.logoutli{
+	display: none;
+}
+.loginli{
+	display: block;
+}
 #introduction {
 	display: flex;
 	align-items: center;
@@ -136,6 +142,9 @@ li:hover {
     justify-content: center;
     gap: 20px;
 }
+.btnmodifier{
+	display: none;
+}
 .edition-mode {
 	background-color: black;
 	height: 60px;
@@ -145,19 +154,21 @@ li:hover {
 	justify-content: center;
 	align-items: center;
 	gap: 1%;
-	margin: 0;
-	padding: 0;
+   display: none;
+   margin: 0;
 }
-.visibility {
+/*.visibility {
 	display: none;
-}
+}*/
 .filtres {
 	display: flex;
 	justify-content: center;
 	gap: 10px;
 	margin-bottom: 50px;
+	
   }
 .filtres button {
+	display: block;
 	font-family: 'Syne';
 	font-weight: 700;
 	color: #1D6154;

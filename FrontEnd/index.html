@@ -13,9 +13,11 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="./scripts/index.js" defer></script>
+	<script src="./scripts/login.js" defer></script>
+
 </head>
 <body>
-<div id="mode-edition" class="visibility">
+<div class="edition-mode">
 		<i class="fas fa-pen-to-square"></i> <span>Mode édition</span>
 </div>
 <header>
@@ -24,7 +26,9 @@
 		<ul>
 			<li><a href="./index.html"> projets </a></li>
 			<li><a href="#contact"> contact</a></li>
-			<li><a href="./login.html" > login</a></li>
+			<li class="loginli"><a href="./login.html" > login</a></li>
+			<li class="logoutli">logout</li>
+
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -44,7 +48,7 @@
 	<section id="portfolio">
 		<div class="title">
 		   <h2>Mes projets</h2>
-		   <span class="visibility">
+		   <span class="btnmodifier">
             <i class="fas fa-pen-to-square"></i> <span>modifier</span></span>
 	    </div>
 		<div class="filtres">
