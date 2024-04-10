@@ -144,6 +144,7 @@ li:hover {
 }
 .btnmodifier{
 	display: none;
+	cursor: pointer;
 }
 .edition-mode {
 	background-color: black;
@@ -157,18 +158,14 @@ li:hover {
    display: none;
    margin: 0;
 }
-/*.visibility {
-	display: none;
-}*/
 .filtres {
+	visibility: visible;
 	display: flex;
 	justify-content: center;
 	gap: 10px;
 	margin-bottom: 50px;
-	
   }
 .filtres button {
-	display: block;
 	font-family: 'Syne';
 	font-weight: 700;
 	color: #1D6154;
@@ -275,4 +272,95 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+/* Modal */
+.modalContainer {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 480%;
+	background-color:#808080bd;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+.imagesModal {
+	width: 43%;
+	height : 688px;
+	left:28%;
+	top: 600px;
+	background-color: white;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+}
+.imagesModal h2{
+	color: black;
+	margin-top: 70px;
+	margin-bottom: 40px;
+}
+.fa-xmark {
+	position: absolute;
+	top: 30px;
+	right: 20px;
+	cursor: pointer;
+}
+ .imagesModal button {
+	font-family: 'Syne';
+    font-weight: 700;
+    color:white;
+    background-color:#1D6154 ;
+    border-radius: 60px;
+    width: 237px;
+    border: 2px solid #1D6154;
+	height: 36px;
+	position: absolute;
+	bottom: 35px;
+}
+hr {
+	color: #B3B3B3;
+	width:80%;
+	height: 0px;
+	border: 1px solid #B3B3B3;
+	bottom: 100px;
+	position: absolute;
+  }
+  .imgGallery{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 15px;
+	row-gap: 30px;
+	padding-left: 100px;
+	padding-right: 100px;
+	margin: 0;
 
+  }
+  
+   .imgGallery figure {
+	width: 76px;
+	height: 102px;
+	position: relative;
+  }
+  .imagesModal .imgGallery  figure img {
+	width: 100%;
+	height: 100%;
+  }
+ .imgGallery  figure span {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background-color: black;
+	height: 17px;
+    width: 17px ;
+	cursor: pointer;
+  }
+  .fa-trash-can {
+	font-size: 0.7rem;
+	color: white;
+  }

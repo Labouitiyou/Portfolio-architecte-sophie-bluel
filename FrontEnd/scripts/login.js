@@ -11,14 +11,14 @@ function islogged(){
        mode.style.display= "flex"
        buttonModifier.style.display= "block"
        // Masquer les buttons des filtres
-       buttonFiltres.style.display= "none"
+       buttonFiltres.style.visibility= "hidden"
        
      } else {
       // Masquer le mode édition et le button modifier
        mode.style.display= "none"
        buttonModifier.style.display= "none"
         // Afficher les buttons des filtres
-       buttonFiltres.style.display= "flex"
+      buttonFiltres.style.visibility= "visible"
       }
   }
 }
@@ -48,10 +48,12 @@ function login(){
                }
             const result = await response.json();
               // Stockage du token dans le local storage
-            localStorage.setItem("token", result.token);
+            if(result && result.token) {
+               localStorage.setItem("token", result.token);
             
-            // Redirection vers la page d'accueil
-            window.location.href ="index.html"
+              // Redirection vers la page d'accueil
+              window.location.href ="index.html"
+            }
         } 
        catch (error) {
             // Message en cas d'erreurs de requête ou de connexion
