@@ -158,6 +158,9 @@ li:hover {
    display: none;
    margin: 0;
 }
+.edition-mode i , span {
+	cursor: pointer;
+}
 .filtres {
 	visibility: visible;
 	display: flex;
@@ -363,4 +366,97 @@ hr {
   .fa-trash-can {
 	font-size: 0.7rem;
 	color: white;
+  }
+.addImages{
+	width: 43%;
+	height : 688px;
+	left:28%;
+	top: 600px;
+	background-color: white;
+	border-radius: 5px;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+
+}
+.fa-arrow-left{
+	position: absolute;
+	top: 30px;
+	left: 20px;
+	cursor: pointer;
+}
+.addImages h2{
+	color: black;
+	margin-top: 70px;
+	margin-bottom: 40px;
+}
+#addimage{
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	align-items: center;
+}
+#addimage input[type="submit"]{
+	font-family: 'Syne';
+    font-weight: 700;
+    color:white;
+    background-color:#1D6154 ;
+    border-radius: 60px;
+    width: 237px;
+    border: 2px solid #1D6154;
+	height: 36px;
+	position: absolute;
+	bottom: 35px;
+}
+#addimage input, select{
+		height: 51px;
+		width: 420px;
+		border: none;
+		box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+		margin-bottom: 20px;
+		margin-top: 10px;
+	}
+#addimage label{
+	display: flex;
+	align-self: flex-start;
+}
+.Image_Zone{
+	width: 420px;
+	height: 169px;
+	background-color: #E8F1F6;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 20px;
+	border-radius: 5px;
+
+
+}
+.Image_Zone .fa-image {
+	font-size: 3rem;
+	color: #B3B3B3; 
+	margin-top: 20px;  
+	margin-bottom: 10px;
+  }
+.Image_Zone label {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	color: #306685;
+	border-radius: 50px;
+	background-color: #cbd6dc;
+	border: none;
+	width: 173px;
+	height: 36px;
+	margin-bottom: 10px;
+  }
+  .Image_Zone input{
+	display: none;
+  }
+  .Image_Zone img {
+	display: none;
+	max-width: 100%;
+	height: 100%;
   }

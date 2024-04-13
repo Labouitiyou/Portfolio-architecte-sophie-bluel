@@ -33,6 +33,28 @@
 	  <hr />
 	  <button>Ajouter une photo</button>
 	</div>
+	<div class="addImages">
+		<span><i class="fa-solid fa-arrow-left"></i></span>
+		<span><i class="fa-solid fa-xmark"></i></span>
+		<h2>Ajout Photo</h2>
+		<div class="Image_Zone">
+			<span><i class="fa-regular fa-image"></i></span>
+            <label  for="file"> + Ajouter photo
+            <input  type="file" id="file" name="imageUrl"></label>
+            <p>jpg,png: 4mo max</p>
+			<img>
+		</div>
+		<form id="addimage" action="#" method="post">
+		<label for="titre">Titre</label>
+		<input type="text" name="titre" id="titre">
+		<label for="category"> Catégorie</label>
+		<select id="category" name="category">
+		 <option></option>
+		</select>
+		<hr />
+		<input type="submit" value="Valider">
+	    </form>
+	</div>
 </div>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
