@@ -102,8 +102,3 @@ function logout() {
   logout();
   login();
   });
-
-  /*window.addEventListener("popstate", function (event) {
-    // Vérifier l'état de connexion lorsque l'utilisateur utilise le bouton "retour" du navigateur
-    islogged();
-  });*/

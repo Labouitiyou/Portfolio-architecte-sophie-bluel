@@ -12,7 +12,7 @@ async function getWorks() {
 }
 
 //Affichage des works //
-async function afficherWorks(works){
+function afficherWorks(works){
     if(gallery){
         gallery.innerHTML = "";
         for (let i=0; i< works.length; i++) {
@@ -36,10 +36,8 @@ async function getCategory(){
 }
 
 // Génerer dynamiquement le menu de catégories//
-async function generateMenuCategory()
-{   
+function generateMenuCategory(categorys){   
   if(filtres){
-    const categorys = await getCategory();
     for (let i=0; i<categorys.length; i++) {
        const button= document.createElement("button");
        button.textContent = categorys[i].name;
@@ -48,26 +46,26 @@ async function generateMenuCategory()
       }
   }
 }
-
 // Ajout des filtres pour afficher les travaux par catégorie 
-async function filtrerCategory(works){
+ function filtrerCategory(works){
   const listButton= document.querySelectorAll(".filtres button")
+  console.log(listButton.length)
   for(let i=0; i< listButton.length; i++){
     listButton[i].addEventListener("click", async () => {
       if (listButton[i].id !== "0"){ 
         const worksfiltres = works.filter(function(work) {
           return work.categoryId == listButton[i].id;
         });
-        await afficherWorks(worksfiltres);
+        afficherWorks(worksfiltres);
       }
       else {
-      await afficherWorks(works); 
+       afficherWorks(works); 
       }
     });
   }
 }
 
-// Récuperer les photos et les afficher dans la modale//
+//Récuperer les photos et les afficher dans la modale//
 const galleryimg = document.querySelector(".imgGallery");
 async function imgDisplay(works) {
   galleryimg.innerHTML = "";
@@ -101,7 +99,7 @@ function setGalery(){
 }
 setGalery();
 
- // Selectionner l'image à l'ajouter dans la modale //
+ //Selectionner l'image à l'ajouter dans la modale //
 function selectImage(){
   const imgFile = document.querySelector(".Image_Zone img");
   const inputFile = document.querySelector(".Image_Zone input");
@@ -129,13 +127,13 @@ selectImage();
 //Récuperer les catégories et les ajouter au formulaire.
 async function selectCat(){
    const selectCategory = document.getElementById("category");
-   const categorys = await getCategory();
-   for (let i=0; i<categorys.length; i++) {
+   const category = await getCategory();
+   for (let i=0; i<category.length; i++) {
      // Créer un nouvel élément d'option
      const option = document.createElement("option");
      // Définir la valeur et le texte de l'option avec les données de la catégorie
-     option.value = categorys[i].id;
-     option.textContent = categorys[i].name;
+     option.value = category[i].id;
+     option.textContent = category[i].name;
      // Ajouter cette option au menu déroulant des catégories
      selectCategory.appendChild(option);
   }
@@ -265,12 +263,13 @@ function deleteImages() {
 deleteImages();
 
 document.addEventListener("DOMContentLoaded", async () => {
-    generateMenuCategory();
-    const works = await getWorks();
-    await afficherWorks(works);
-    filtrerCategory(works); 
-    imgDisplay(works);
-    deleteImages();
+  const works = await getWorks();
+  const categorys = await getCategory();
+  generateMenuCategory(categorys);
+  afficherWorks(works);
+  filtrerCategory(works); 
+  imgDisplay(works);
+  deleteImages();
 });
 
 
