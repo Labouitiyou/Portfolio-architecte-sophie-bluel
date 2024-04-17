@@ -1,6 +1,8 @@
 const gallery = document.querySelector(".gallery");
 const filtres = document.querySelector(".filtres");
 const Modal = document.querySelector(".modalContainer");
+const imagesModal = document.querySelector(".imagesModal");
+const addImgModal = document.querySelector(".addImages");
 
 
 //Récupération des works //
@@ -49,7 +51,6 @@ function generateMenuCategory(categorys){
 // Ajout des filtres pour afficher les travaux par catégorie 
  function filtrerCategory(works){
   const listButton= document.querySelectorAll(".filtres button")
-  console.log(listButton.length)
   for(let i=0; i< listButton.length; i++){
     listButton[i].addEventListener("click", async () => {
       if (listButton[i].id !== "0"){ 
@@ -67,7 +68,7 @@ function generateMenuCategory(categorys){
 
 //Récuperer les photos et les afficher dans la modale//
 const galleryimg = document.querySelector(".imgGallery");
-async function imgDisplay(works) {
+function imgDisplay(works) {
   galleryimg.innerHTML = "";
   for (let i=0; i< works.length; i++) {
     const figure = document.createElement("figure");
@@ -82,22 +83,8 @@ async function imgDisplay(works) {
     figure.appendChild(img);
     galleryimg.appendChild(figure);
   }
+  deleteImages();
 }
-  
-
-// Ouvrir et fermer la modale pour gérer les projets
-function setGalery(){
-  const buttonModifier = document.querySelector(".title span");
-  const xmark = document.querySelector(".fa-xmark");
-  buttonModifier.addEventListener("click",() =>{
-    Modal.style.display= "flex"
-  });
-  xmark.addEventListener("click",() =>{
-    Modal.style.display= "none"
-    window.location.href ="index.html"
-    });
-}
-setGalery();
 
  //Selectionner l'image à l'ajouter dans la modale //
 function selectImage(){
@@ -122,12 +109,12 @@ function selectImage(){
     }
   });
 }
-selectImage();
 
-//Récuperer les catégories et les ajouter au formulaire.
-async function selectCat(){
+
+// Récuperer les catégories et les ajouter au formulaire.
+async function selectCat(category){
    const selectCategory = document.getElementById("category");
-   const category = await getCategory();
+  // const category = await getCategory();
    for (let i=0; i<category.length; i++) {
      // Créer un nouvel élément d'option
      const option = document.createElement("option");
@@ -138,16 +125,28 @@ async function selectCat(){
      selectCategory.appendChild(option);
   }
 }
-selectCat();
+
 
 // Fermer la modale et retour à la modale précédante 
 function Modalgestion(){
   const close = document.querySelector(".addImages .fa-xmark");
   const retour = document.querySelector(".addImages .fa-arrow-left");
-  const Modal = document.querySelector(".modalContainer");
-  const imagesModal = document.querySelector(".imagesModal");
-  const addImgModal = document.querySelector(".addImages");
+  const Modal = document.querySelector(".modalContainer"); 
   const buttonValider = document.querySelector(".imagesModal button");
+  const buttonModifier = document.querySelector(".title span");
+  const xmark = document.querySelector(".imagesModal .fa-xmark");
+
+  // Ouvrir la modale en cliquant sur le button modifier.
+  buttonModifier.addEventListener("click",() =>{
+    Modal.style.display= "flex"
+    addImgModal.style.display= "none"
+    imagesModal.style.display= "flex"
+  });
+  //Fermer la modale en cliquant sur l'icone xmark
+  xmark.addEventListener("click",() =>{
+    Modal.style.display= "none"
+    window.location.href ="index.html"
+    });
   // Fermer la modal en cliquant sur la Xmark
   close.addEventListener("click",() =>{
     Modal.style.display= "none"
@@ -164,7 +163,7 @@ function Modalgestion(){
     imagesModal.style.display= "none"
   });
 }
-Modalgestion();
+
 
 // Valider l'ajout de la photo //
 const form = document.getElementById("addimage");
@@ -194,7 +193,6 @@ form.addEventListener("submit", async (e) => {
       body: formData,
     });
     if (response.ok) {
-      e.preventDefault();
       const responseData = await response.json();
 
       // Récuperation l'URL de l'image depuis la réponse JSON
@@ -210,9 +208,15 @@ form.addEventListener("submit", async (e) => {
 
       //  Si l'image s'ajoute bien
       alert("Image ajoutée avec succès !");
+       title.value= "";
+       category.value="";
       const work = await getWorks();
       imgDisplay(work);
-      Modal.style.display= "none"
+      Modal.style.display= "flex";
+      addImgModal.style.display= "none";
+      imagesModal.style.display= "flex";
+
+      
     } else {
        // Pour gérer les erreurs de la requête
        alert("Une erreur est survenue lors de l'envoi de l'image.");
@@ -260,8 +264,8 @@ function deleteImages() {
     });
   });
 }
-deleteImages();
 
+// Appeler les fonctions //
 document.addEventListener("DOMContentLoaded", async () => {
   const works = await getWorks();
   const categorys = await getCategory();
@@ -269,6 +273,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   afficherWorks(works);
   filtrerCategory(works); 
   imgDisplay(works);
+  selectCat(categorys);
+  selectImage();
+  Modalgestion();
   deleteImages();
 });
 

@@ -299,6 +299,7 @@ footer nav ul {
 	flex-direction: column;
 	align-items: center;
 	position: relative;
+	overflow: scroll;
 }
 .imagesModal h2{
 	color: black;
@@ -379,6 +380,7 @@ hr {
 	flex-direction: column;
 	align-items: center;
 	position: relative;
+	overflow: scroll;
 
 }
 .fa-arrow-left{
