@@ -96,7 +96,7 @@ function logout() {
     }
   }
 }
-
+// Appeler les fonctions 
  document.addEventListener("DOMContentLoaded", function () {
   islogged();
   logout();
