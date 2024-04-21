@@ -6,7 +6,6 @@ const addImgModal = document.querySelector(".addImages");
 
 
 //Récupération des works //
-
 async function getWorks() {
    const reponse = await fetch("http://localhost:5678/api/works");
    const works= await reponse.json();
@@ -48,6 +47,7 @@ function generateMenuCategory(categorys){
       }
   }
 }
+
 // Ajout des filtres pour afficher les travaux par catégorie 
  function filtrerCategory(works){
   const listButton= document.querySelectorAll(".filtres button")
@@ -86,7 +86,7 @@ function imgDisplay(works) {
   deleteImages();
 }
 
- //Selectionner l'image à l'ajouter dans la modale //
+ //Selectionner l'image à ajouter dans la modale //
 function selectImage(){
   const imgFile = document.querySelector(".Image_Zone img");
   const inputFile = document.querySelector(".Image_Zone input");
@@ -110,7 +110,6 @@ function selectImage(){
   });
 }
 
-
 // Récuperer les catégories et les ajouter au formulaire.
 async function selectCat(category){
    const selectCategory = document.getElementById("category");
@@ -126,13 +125,12 @@ async function selectCat(category){
   }
 }
 
-
 // Fermer la modale et retour à la modale précédante 
 function Modalgestion(){
   const close = document.querySelector(".addImages .fa-xmark");
   const retour = document.querySelector(".addImages .fa-arrow-left");
   const Modal = document.querySelector(".modalContainer"); 
-  const buttonValider = document.querySelector(".imagesModal button");
+  const buttonAjouter = document.querySelector(".imagesModal button");
   const buttonModifier = document.querySelector(".title span");
   const xmark = document.querySelector(".imagesModal .fa-xmark");
 
@@ -141,6 +139,12 @@ function Modalgestion(){
     Modal.style.display= "flex"
     addImgModal.style.display= "none"
     imagesModal.style.display= "flex"
+  });
+  //fermer la modal en cliquant à l'extérieutr
+  Modal.addEventListener("click",(e) =>{
+    if (e.target.className == "modalContainer") {
+      Modal.style.display = "none";
+    }
   });
   //Fermer la modale en cliquant sur l'icone xmark
   xmark.addEventListener("click",() =>{
@@ -158,21 +162,28 @@ function Modalgestion(){
     imagesModal.style.display= "flex"
   });
   // En cliquant sur "valider", fermer la modale Galery Photo et ouvrir la modale "Ajout Photo"
-  buttonValider.addEventListener("click",() =>{
+  buttonAjouter.addEventListener("click",() =>{
     addImgModal.style.display= "flex"
     imagesModal.style.display= "none"
   });
 }
-
 
 // Valider l'ajout de la photo //
 const form = document.getElementById("addimage");
 const title = document.getElementById("titre");
 const category = document.getElementById("category");
 const imageInput = document.getElementById("file");
+const buttonValider = document.getElementById("btnValider")
+
+// Changement de la couleur du boutton Valider quand les champs sont remplis
+form.addEventListener("change", () => {
+if (imageInput.files[0] && title.value && category.value) {
+  buttonValider.style.backgroundColor= "#1D6154";
+}
+});
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  // Vérification du  fichier image,  titre et une catégorie sont sélectionnés
+  // Vérification du  fichier image, titre et une catégorie sont sélectionnés
   if (!imageInput.files[0] || !title.value || !category.value) {
     alert("Veuillez remplir tous les champs.");
     return;
